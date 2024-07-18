@@ -12,6 +12,7 @@ public class TaskDAO {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -25,6 +26,7 @@ public class TaskDAO {
             statement.setDate(4, Date.valueOf(task.getDueDate()));
             statement.executeUpdate();
         } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -44,6 +46,7 @@ public class TaskDAO {
                 tasks.add(task);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
         }
         return tasks;
     }
@@ -59,6 +62,7 @@ public class TaskDAO {
             statement.setInt(5, task.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -69,6 +73,7 @@ public class TaskDAO {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
