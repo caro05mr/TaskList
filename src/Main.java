@@ -1,49 +1,85 @@
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         TaskDAO taskDAO = new TaskDAO();
+        Scanner scanner = new Scanner(System.in);
 
-        // Insertar una nueva tarea
-        Task newTask = new Task("Learn Java", "Complete the JDBC tutorial", "Pending", new Date());
-        taskDAO.insertTask(newTask);
-        System.out.println("Task inserted!");
+        while (true) {
+            System.out.println("Seleccione una acción:");
+            System.out.println("1. Crear una nueva tarea");
+            System.out.println("2. Consultar todas las tareas");
+            System.out.println("3. Actualizar una tarea");
+            System.out.println("4. Eliminar una tarea");
+            System.out.println("5. Salir");
 
-        // Obtener y mostrar todas las tareas
-        List<Task> tasks = taskDAO.getAllTasks();
-        System.out.println("All Tasks:");
-        for (Task task : tasks) {
-            System.out.println("ID: " + task.getId() + ", Title: " + task.getTitle() + ", Description: " + task.getDescription() + ", Status: " + task.getStatus() + ", Due Date: " + task.getDueDate());
-        }
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consumir el salto de línea
 
-        // Actualizar una tarea
-        if (!tasks.isEmpty()) {
-            Task taskToUpdate = tasks.get(0);
-            taskToUpdate.setStatus("Completed");
-            taskDAO.updateTask(taskToUpdate);
-            System.out.println("Task updated!");
+            switch (choice) {
+                case 1:
+                    System.out.println("Ingrese el título de la tarea:");
+                    String title = scanner.nextLine();
+                    System.out.println("Ingrese la descripción de la tarea:");
+                    String description = scanner.nextLine();
+                    System.out.println("Ingrese el estado de la tarea:");
+                    String status = scanner.nextLine();
+                    System.out.println("Ingrese la fecha de vencimiento de la tarea (YYYY-MM-DD):");
+                    LocalDate dueDate = LocalDate.parse(scanner.nextLine());
 
-            // Mostrar todas las tareas después de la actualización
-            tasks = taskDAO.getAllTasks();
-            System.out.println("All Tasks After Update:");
-            for (Task task : tasks) {
-                System.out.println("ID: " + task.getId() + ", Title: " + task.getTitle() + ", Description: " + task.getDescription() + ", Status: " + task.getStatus() + ", Due Date: " + task.getDueDate());
-            }
-        }
+                    Task newTask = new Task(title, description, status, dueDate);
+                    taskDAO.addTask(newTask);
+                    System.out.println("¡Tarea insertada!");
+                    break;
 
-        // Eliminar una tarea
-        if (!tasks.isEmpty()) {
-            Task taskToDelete = tasks.get(0);
-            taskDAO.deleteTask(taskToDelete.getId());
-            System.out.println("Task deleted!");
+                case 2:
+                    List<Task> tasks = taskDAO.getAllTasks();
+                    System.out.println("Todas las tareas:");
+                    for (Task task : tasks) {
+                        System.out.println(task);
+                    }
+                    break;
 
-            // Mostrar todas las tareas después de la eliminación
-            tasks = taskDAO.getAllTasks();
-            System.out.println("All Tasks After Deletion:");
-            for (Task task : tasks) {
-                System.out.println("ID: " + task.getId() + ", Title: " + task.getTitle() + ", Description: " + task.getDescription() + ", Status: " + task.getStatus() + ", Due Date: " + task.getDueDate());
+                case 3:
+                    System.out.println("Ingrese el ID de la tarea a actualizar:");
+                    int updateId = scanner.nextInt();
+                    scanner.nextLine(); // Consumir el salto de línea
+
+                    System.out.println("Ingrese el nuevo título de la tarea:");
+                    String updateTitle = scanner.nextLine();
+                    System.out.println("Ingrese la nueva descripción de la tarea:");
+                    String updateDescription = scanner.nextLine();
+                    System.out.println("Ingrese el nuevo estado de la tarea:");
+                    String updateStatus = scanner.nextLine();
+                    System.out.println("Ingrese la nueva fecha de vencimiento de la tarea (YYYY-MM-DD):");
+                    LocalDate updateDueDate = LocalDate.parse(scanner.nextLine());
+
+                    Task updatedTask = new Task(updateId, updateTitle, updateDescription, updateStatus, updateDueDate);
+                    taskDAO.updateTask(updatedTask);
+                    System.out.println("¡Tarea actualizada!");
+                    break;
+
+                case 4:
+                    System.out.println("Ingrese el ID de la tarea a eliminar:");
+                    int deleteId = scanner.nextInt();
+                    scanner.nextLine(); // Consumir el salto de línea
+
+                    taskDAO.deleteTask(deleteId);
+                    System.out.println("¡Tarea eliminada!");
+                    break;
+
+                case 5:
+                    System.out.println("¡Saliendo!");
+                    scanner.close();
+                    return;
+
+                default:
+                    System.out.println("Opción no válida. Por favor, intente de nuevo.");
+                    break;
             }
         }
     }
 }
+
