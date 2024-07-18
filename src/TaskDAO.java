@@ -4,15 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskDAO {
-    private String jdbcURL = "jdbc:mysql://localhost:3306/tu_base_de_datos";
-    private String jdbcUsername = "tu_usuario";
-    private String jdbcPassword = "tu_contraseña";
+    private String jdbcURL = "jdbc:mysql://localhost:3306/TaskManagerDB";
+    private String jdbcUsername = "root";
+    private String jdbcPassword = "Caro#03-05-2005";
 
     public TaskDAO() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
     }
 
@@ -26,7 +25,6 @@ public class TaskDAO {
             statement.setDate(4, Date.valueOf(task.getDueDate()));
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
@@ -46,7 +44,6 @@ public class TaskDAO {
                 tasks.add(task);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         return tasks;
     }
@@ -62,7 +59,6 @@ public class TaskDAO {
             statement.setInt(5, task.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
@@ -73,7 +69,6 @@ public class TaskDAO {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 }
