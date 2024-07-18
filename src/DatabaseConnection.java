@@ -3,7 +3,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    private static final String URL = "jdbc:mysql://localhost:3306/TaskManagerDB";
+    private static final String URL = "jdbc:mysql://localhost:3306/TaskManagerDb";
     private static final String USER = "root";
     private static final String PASSWORD = "Caro#03-05-2005";
 
