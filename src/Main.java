@@ -16,15 +16,15 @@ public class Main {
             System.out.println("5. Salir");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consumir el salto de línea
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
                     System.out.println("Ingrese el título de la tarea:");
                     String title = scanner.nextLine();
-                    System.out.println("Ingrese la descripción de la tarea:");
+                    System.out.println("descripción de la tarea:");
                     String description = scanner.nextLine();
-                    System.out.println("Ingrese el estado de la tarea:");
+                    System.out.println("estado de la tarea:");
                     String status = scanner.nextLine();
                     System.out.println("Ingrese la fecha de vencimiento de la tarea (YYYY-MM-DD):");
                     LocalDate dueDate = LocalDate.parse(scanner.nextLine());
@@ -45,13 +45,13 @@ public class Main {
                 case 3:
                     System.out.println("Ingrese el ID de la tarea a actualizar:");
                     int updateId = scanner.nextInt();
-                    scanner.nextLine(); // Consumir el salto de línea
+                    scanner.nextLine(); 
 
                     System.out.println("Ingrese el nuevo título de la tarea:");
                     String updateTitle = scanner.nextLine();
-                    System.out.println("Ingrese la nueva descripción de la tarea:");
+                    System.out.println("nueva descripción de la tarea:");
                     String updateDescription = scanner.nextLine();
-                    System.out.println("Ingrese el nuevo estado de la tarea:");
+                    System.out.println("nuevo estado de la tarea:");
                     String updateStatus = scanner.nextLine();
                     System.out.println("Ingrese la nueva fecha de vencimiento de la tarea (YYYY-MM-DD):");
                     LocalDate updateDueDate = LocalDate.parse(scanner.nextLine());
@@ -64,7 +64,7 @@ public class Main {
                 case 4:
                     System.out.println("Ingrese el ID de la tarea a eliminar:");
                     int deleteId = scanner.nextInt();
-                    scanner.nextLine(); // Consumir el salto de línea
+                    scanner.nextLine(); 
 
                     taskDAO.deleteTask(deleteId);
                     System.out.println("¡Tarea eliminada!");
